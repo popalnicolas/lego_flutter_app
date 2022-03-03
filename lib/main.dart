@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lego_flutter_app/screens/wrapper.dart';
+import 'package:lego_flutter_app/screens/home.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,11 +11,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Lego App',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Wrapper(),
+      home: HomeScreen(),
+      routes: {
+
+      },
     );
   }
 }
