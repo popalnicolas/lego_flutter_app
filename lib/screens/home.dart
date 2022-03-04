@@ -13,6 +13,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -20,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           IconButton(
             onPressed: (){
-
+              Navigator.pushNamedAndRemoveUntil(context, "/account", (route) => false);
             },
             // @TODO: update icon - use lego head
             icon: Icon(Icons.face),

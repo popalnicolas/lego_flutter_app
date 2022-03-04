@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lego_flutter_app/screens/account.dart';
 import 'package:lego_flutter_app/screens/auth/profile.dart';
 import 'package:lego_flutter_app/screens/category.dart';
 import 'package:lego_flutter_app/screens/home.dart';
@@ -31,6 +32,12 @@ class MyApp extends StatelessWidget {
             return PageRouteBuilder(
                 settings: settings,
                 pageBuilder: (_, __, ___) => HomeScreen(),
+                transitionsBuilder: (_, a, __, c) => FadeTransition(opacity: a, child: c)
+            );
+          case "/account":
+            return PageRouteBuilder(
+                settings: settings,
+                pageBuilder: (_, __, ___) => AccountScreen(),
                 transitionsBuilder: (_, a, __, c) => FadeTransition(opacity: a, child: c)
             );
         }

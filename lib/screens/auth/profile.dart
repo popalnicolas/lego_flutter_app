@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:lego_flutter_app/models/user_model.dart';
 
 import '../../constants.dart';
 
 class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({Key? key}) : super(key: key);
+  const ProfileScreen({Key? key, this.user, required this.logoutUser}) : super(key: key);
+
+  final UserModel? user;
+  final Function() logoutUser;
 
   @override
   _ProfileScreenState createState() => _ProfileScreenState();
@@ -68,19 +72,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 padding: EdgeInsets.only(
                   top: MediaQuery.of(context).size.height*0.14,
                 ),
-                child: Column(
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        boxShadow: [BoxShadow(blurRadius: 10, color: Colors.black, spreadRadius: 5)],
-                      ),
-                      child: CircleAvatar(
-                        radius: MediaQuery.of(context).size.height*0.1,
-                        backgroundImage: NetworkImage("https://i.pinimg.com/736x/f8/1b/f0/f81bf032d0a33a7d4a79214c5edc4816.jpg"),
-                      ),
-                    )
-                  ],
+                child: Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    boxShadow: [BoxShadow(blurRadius: 10, color: Colors.black, spreadRadius: 5)],
+                  ),
+                  child: CircleAvatar(
+                    radius: MediaQuery.of(context).size.height*0.1,
+                    backgroundImage: NetworkImage("https://i.pinimg.com/736x/f8/1b/f0/f81bf032d0a33a7d4a79214c5edc4816.jpg"),
+                  ),
                 ),
               )
           ),
