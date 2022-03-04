@@ -17,19 +17,13 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: IconButton(
-          icon: Icon(Icons.search),
-          onPressed: () {
-
-          },
-        ),
         actions: [
           IconButton(
             onPressed: (){
 
             },
-            // @TODO: update icon
-            icon: Icon(Icons.verified_user_outlined),
+            // @TODO: update icon - use lego head
+            icon: Icon(Icons.face),
           )
         ],
       ),
@@ -58,6 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: const EdgeInsets.fromLTRB(defaultPadding, defaultPadding*1.5, defaultPadding, defaultPadding/2),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -65,21 +60,19 @@ class _HomeScreenState extends State<HomeScreen> {
                       Text("Themes", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
                       TextButton(
                         onPressed: (){
-
+                          Navigator.pushNamed(context, "/category");
                         },
                         child: Text("See All"),
+                        style: TextButton.styleFrom(
+                          padding: EdgeInsets.zero,
+                        ),
                       )
                     ],
                   ),
                   //@TODO: Categories HERE
 
                   SizedBox(height: defaultPadding,),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text("Top Rated", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
-                    ],
-                  ),
+                  Text("Top Rated", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
                   //@TODO: Top Rated Legos here
                 ],
               ),
