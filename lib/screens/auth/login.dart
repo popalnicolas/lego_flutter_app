@@ -23,7 +23,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   final _formKey = GlobalKey<FormState>();
 
-  String _userEmail = "", _password = "";
+  String _userEmail = "", _password = "", _errorMessage = "";
+  bool _error = false;
 
   @override
   Widget build(BuildContext context) {
@@ -123,6 +124,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           ],
                         ),
                         SizedBox(height: defaultPadding/2,),
+                        _error ? Text(_errorMessage, style: TextStyle(color: Colors.red),) : Container(),
+                        _error ? SizedBox(height: defaultPadding/2,) : Container(),
                         Container(
                           width: double.infinity,
                           child: ElevatedButton(
@@ -130,8 +133,11 @@ class _LoginScreenState extends State<LoginScreen> {
                               if(_formKey.currentState!.validate()) {
                                 var user = await _authService.loginUser(
                                     _userEmail, _password);
-                                if (user == null)
+                                if (user == null) {
                                   print("Error");
+                                  _error = true;
+                                  _errorMessage = "Wrong password or account does not exist";
+                                }
                                 else {
                                   await _authStorage.saveUser(user);
                                   widget.loginUser(user);
