@@ -41,6 +41,7 @@ class _AccountScreenState extends State<AccountScreen> {
     setState(() {
       userLoggedIn = false;
       user = null;
+      _storage.removeUser();
     });
   }
 

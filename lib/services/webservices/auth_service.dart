@@ -5,7 +5,7 @@ import 'package:lego_flutter_app/models/user_model.dart';
 
 class AuthService
 {
-  final String url = "http://localhost:8080/api/auth";
+  final String url = "http://192.168.87.140:8080/api/auth";
 
   Future<UserModel?> loginUser(String username, String password) async {
     Map<String, dynamic> jsonMap =
@@ -20,9 +20,14 @@ class AuthService
       );
       Map tokens = jsonDecode(responsePost.body);
 
-      Response responseGet = await get(Uri.parse("$url/login"), headers: {
+      print(responsePost.body);
+
+      Response responseGet = await get(Uri.parse("$url/getUser"), headers: {
         "Authorization": "Bearer ${tokens['access_token']}"
       });
+
+      print(responseGet.body);
+
       Map userDetails = jsonDecode(responseGet.body);
       UserModel user = UserModel(
           userId: userDetails['userId'],
