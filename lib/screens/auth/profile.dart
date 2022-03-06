@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:lego_flutter_app/models/user_model.dart';
+import 'package:lego_flutter_app/screens/account/about_screen.dart';
+import 'package:lego_flutter_app/screens/account/liked_lego.dart';
+import 'package:lego_flutter_app/screens/account/personal_profile.dart';
+import 'package:lego_flutter_app/screens/account/reviews_screen.dart';
 
 import '../../constants.dart';
 
@@ -63,16 +67,37 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          PersonalProfileBox(),
-                          ProfileBox(title: "Liked Lego", image: "assets/images/legoheart.png"),
+                          widget.user == null ? Container() :
+                              GestureDetector(
+                                child: PersonalProfileBox(userAvatar: widget.user!.avatar,),
+                                onTap: () {
+                                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => PersonalProfileScreen()));
+                                },
+                              ),
+                          GestureDetector(
+                            child: ProfileBox(title: "Liked Lego", image: "assets/images/legoheart.png"),
+                            onTap: () {
+                              Navigator.of(context).push(MaterialPageRoute(builder: (context) => LikedLegoScreen()));
+                            },
+                          )
                         ],
                       ),
                       SizedBox(height: defaultPadding,),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          ProfileBox(title: "My Reviews", image: "assets/images/legoreview.png"),
-                          ProfileBox(title: "About Lego", image: "assets/images/lego.png"),
+                          GestureDetector(
+                            child: ProfileBox(title: "My Reviews", image: "assets/images/legoreview.png"),
+                            onTap: () {
+                              Navigator.of(context).push(MaterialPageRoute(builder: (context) => ReviewsScreen()));
+                            },
+                          ),
+                          GestureDetector(
+                            child: ProfileBox(title: "About Lego", image: "assets/images/lego.png"),
+                            onTap: () {
+                              Navigator.of(context).push(MaterialPageRoute(builder: (context) => AboutScreen()));
+                            },
+                          )
                         ],
                       ),
                       SizedBox(height: defaultPadding,),
@@ -104,9 +129,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     shape: BoxShape.circle,
                     boxShadow: [BoxShadow(blurRadius: 10, color: Colors.black, spreadRadius: 5)],
                   ),
-                  child: CircleAvatar(
+                  child: widget.user == null ? Container() : CircleAvatar(
                     radius: MediaQuery.of(context).size.height*0.1,
-                    backgroundImage: NetworkImage("https://i.pinimg.com/736x/f8/1b/f0/f81bf032d0a33a7d4a79214c5edc4816.jpg"),
+                    backgroundImage: NetworkImage(widget.user!.avatar),
                   ),
                 ),
               )
@@ -118,7 +143,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
 }
 
 class PersonalProfileBox extends StatefulWidget {
-  const PersonalProfileBox({Key? key}) : super(key: key);
+  const PersonalProfileBox({Key? key, this.userAvatar}) : super(key: key);
+
+  final String? userAvatar;
 
   @override
   _PersonalProfileBoxState createState() => _PersonalProfileBoxState();
@@ -146,9 +173,11 @@ class _PersonalProfileBoxState extends State<PersonalProfileBox> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            widget.userAvatar == null ? Container()
+                :
             CircleAvatar(
               radius: MediaQuery.of(context).size.width*0.1,
-              backgroundImage: NetworkImage("https://i.pinimg.com/736x/f8/1b/f0/f81bf032d0a33a7d4a79214c5edc4816.jpg"),
+              backgroundImage: NetworkImage(widget.userAvatar!),
             ),
             SizedBox(height: defaultPadding/3,),
             Text("Personal Profile", style: TextStyle(fontWeight: FontWeight.bold),)

@@ -140,6 +140,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 }
                                 else {
                                   await _authStorage.saveUser(user);
+                                  print(user.avatar);
                                   widget.loginUser(user);
                                 }
                               }
