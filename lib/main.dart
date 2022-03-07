@@ -22,12 +22,6 @@ class MyApp extends StatelessWidget {
       home: HomeScreen(),
       onGenerateRoute: (settings) {
         switch(settings.name){
-          case "/category":
-            return PageRouteBuilder(
-                settings: settings,
-                pageBuilder: (_, __, ___) => CategoryScreen(),
-                transitionsBuilder: (_, a, __, c) => FadeTransition(opacity: a, child: c)
-            );
           case "/home":
             return PageRouteBuilder(
                 settings: settings,

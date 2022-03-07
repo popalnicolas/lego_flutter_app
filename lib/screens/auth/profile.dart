@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:lego_flutter_app/models/user_model.dart';
-import 'package:lego_flutter_app/screens/account/about_screen.dart';
-import 'package:lego_flutter_app/screens/account/liked_lego.dart';
-import 'package:lego_flutter_app/screens/account/personal_profile.dart';
-import 'package:lego_flutter_app/screens/account/reviews_screen.dart';
+import 'package:lego_flutter_app/screens/auth/account/about_screen.dart';
+import 'package:lego_flutter_app/screens/auth/account/liked_lego.dart';
+import 'package:lego_flutter_app/screens/auth/account/personal_profile.dart';
+import 'package:lego_flutter_app/screens/auth/account/reviews_screen.dart';
 
 import '../../constants.dart';
 

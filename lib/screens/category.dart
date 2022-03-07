@@ -1,10 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:lego_flutter_app/hex_color.dart';
+import 'package:lego_flutter_app/models/category_model.dart';
 
 import '../constants.dart';
 
 class CategoryScreen extends StatefulWidget {
-  const CategoryScreen({Key? key}) : super(key: key);
+  const CategoryScreen({Key? key, required this.category}) : super(key: key);
+
+  final CategoryModel category;
 
   @override
   _CategoryScreenState createState() => _CategoryScreenState();
@@ -15,6 +19,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
+      backgroundColor: HexColor.fromHex(widget.category.categoryColor).withOpacity(0.5),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -24,15 +29,6 @@ class _CategoryScreenState extends State<CategoryScreen> {
           },
           icon: Icon(Icons.arrow_back_ios),
         ),
-        actions: [
-          IconButton(
-            onPressed: (){
-
-            },
-            // @TODO: update icon - use lego head
-            icon: Icon(Icons.face),
-          )
-        ],
       ),
       body: Stack(
         children: [
@@ -41,13 +37,14 @@ class _CategoryScreenState extends State<CategoryScreen> {
             height: double.infinity,
             decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage("assets/images/bg.jpg"),
-                    fit: BoxFit.cover,
-                    colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.5), BlendMode.darken)
-                )
+                  alignment: Alignment.topCenter,
+                  image: NetworkImage(widget.category.categoryImage,),
+                  fit: BoxFit.fitWidth,
+                  colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.5), BlendMode.darken),
+                ),
             ),
             child: Padding(
-              padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.3),
+              padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.24),
               child: Container(
                 width: double.infinity,
                 height: double.infinity,
@@ -63,8 +60,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Themes", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
-                      //@TODO: Categories HERE
+                      //@TODO: Products HERE
                     ],
                   ),
                 ),
@@ -75,9 +71,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
             alignment: Alignment.topCenter,
             child: Padding(
               padding: EdgeInsets.only(
-                  top: MediaQuery.of(context).size.height*0.14,
+                  top: MediaQuery.of(context).size.height*0.1,
               ),
-              child: Text("Themes", style: TextStyle(color: Colors.white, fontSize: 40, fontWeight: FontWeight.bold),),
+              child: Text(widget.category.categoryName, style: TextStyle(color: Colors.white, fontSize: 40, fontWeight: FontWeight.bold),),
             )
           ),
         ],
