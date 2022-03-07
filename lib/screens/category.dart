@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lego_flutter_app/hex_color.dart';
 import 'package:lego_flutter_app/models/category_model.dart';
+import 'package:lego_flutter_app/models/product_model.dart';
+import 'package:lego_flutter_app/services/webservices/product_service.dart';
 
 import '../constants.dart';
 
@@ -15,6 +17,23 @@ class CategoryScreen extends StatefulWidget {
 }
 
 class _CategoryScreenState extends State<CategoryScreen> {
+
+  final _productService = ProductService();
+
+  List<ProductModel>? _products;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    _productService.getAllLegosByCategory(widget.category.categoryId).then((value) {
+      setState(() {
+        _products = value;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
