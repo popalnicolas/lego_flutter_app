@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:lego_flutter_app/hex_color.dart';
 import 'package:lego_flutter_app/models/category_model.dart';
 import 'package:lego_flutter_app/models/product_model.dart';
+import 'package:lego_flutter_app/screens/product.dart';
 import 'package:lego_flutter_app/services/webservices/product_service.dart';
 
 import '../constants.dart';
@@ -84,7 +85,10 @@ class _CategoryScreenState extends State<CategoryScreen> {
                         padding: const EdgeInsets.only(bottom: defaultPadding),
                         child: GestureDetector(
                           onTap: () {
-
+                            Navigator.of(context).push(
+                                MaterialPageRoute(builder: (context) =>
+                                    ProductScreen(category: widget.category, product: _products![index],))
+                            );
                           },
                           child: Container(
                             width: double.infinity,
@@ -99,22 +103,12 @@ class _CategoryScreenState extends State<CategoryScreen> {
                               padding: const EdgeInsets.all(defaultPadding),
                               child: Column(
                                 children: [
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        "#${_products![index].legoId}",
-                                        style: TextStyle(color: Colors.grey[400]),
-                                      ),
-                                      IconButton(
-                                        padding: EdgeInsets.zero,
-                                        constraints: BoxConstraints(),
-                                        onPressed: (){
-
-                                        },
-                                        icon: Icon(Icons.favorite, color: colorLegoRed,),
-                                      ),
-                                    ],
+                                  Align(
+                                    alignment: Alignment.topLeft,
+                                    child: Text(
+                                      "#${_products![index].legoId}",
+                                      style: TextStyle(color: Colors.grey[400]),
+                                    ),
                                   ),
                                   Image.network(
                                     _products![index].legoImage, height: MediaQuery.of(context).size.height*0.15,
