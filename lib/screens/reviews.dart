@@ -184,6 +184,7 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
 
                                   setState(() {
                                     widget.reviews.insert(0, ReviewModel(rating: _myReview, comment: _reviewText, userEmail: user.userEmail));
+                                    _isReviewed = true;
                                   });
                                 }
                                 else{

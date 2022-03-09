@@ -4,7 +4,6 @@ import 'package:lego_flutter_app/models/user_model.dart';
 import 'package:lego_flutter_app/screens/auth/account/about_screen.dart';
 import 'package:lego_flutter_app/screens/auth/account/liked_lego.dart';
 import 'package:lego_flutter_app/screens/auth/account/personal_profile.dart';
-import 'package:lego_flutter_app/screens/auth/account/reviews_screen.dart';
 
 import '../../constants.dart';
 
@@ -87,23 +86,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           GestureDetector(
-                            child: ProfileBox(title: "My Reviews", image: "assets/images/legoreview.png"),
-                            onTap: () {
-                              Navigator.of(context).push(MaterialPageRoute(builder: (context) => AccountReviewsScreen()));
-                            },
-                          ),
-                          GestureDetector(
                             child: ProfileBox(title: "About Lego", image: "assets/images/lego.png"),
                             onTap: () {
                               Navigator.of(context).push(MaterialPageRoute(builder: (context) => AboutScreen()));
                             },
-                          )
-                        ],
-                      ),
-                      SizedBox(height: defaultPadding,),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
+                          ),
                           GestureDetector(
                             onTap: () {
                               widget.logoutUser();
@@ -112,6 +99,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                         ],
                       ),
+                      SizedBox(height: defaultPadding,),
                     ],
                   ),
                 ),
@@ -182,7 +170,7 @@ class _PersonalProfileBoxState extends State<PersonalProfileBox> {
               backgroundImage: NetworkImage(widget.userAvatar!),
             ),
             SizedBox(height: defaultPadding/3,),
-            Text("Personal Profile", style: TextStyle(fontWeight: FontWeight.bold),)
+            Text("Change Avatar", style: TextStyle(fontWeight: FontWeight.bold),)
           ],
         ),
       ),
