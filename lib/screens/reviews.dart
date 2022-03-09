@@ -27,6 +27,8 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
   bool _isLogged = true;
   String _errorMsg = "";
 
+  int _myReview = 1;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,6 +76,60 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
                         height: MediaQuery.of(context).size.height*0.2,
                         child: Column(
                           children: [
+                            Row(
+                              children: [
+                                IconButton(
+                                    padding: EdgeInsets.zero,
+                                    constraints: BoxConstraints(),
+                                  onPressed: () {
+                                      setState(() {
+                                        _myReview = 1;
+                                      });
+                                  },
+                                    icon: SvgPicture.asset("assets/images/lego-brick.svg", height: 15, color: colorLegoYellow,)
+                                ),
+                                IconButton(
+                                    padding: EdgeInsets.zero,
+                                    constraints: BoxConstraints(),
+                                    onPressed: () {
+                                      setState(() {
+                                        _myReview = 2;
+                                      });
+                                    },
+                                    icon: SvgPicture.asset("assets/images/lego-brick.svg", height: 15, color: _myReview >= 2 ? colorLegoYellow : colorGrey,)
+                                ),
+                                IconButton(
+                                    padding: EdgeInsets.zero,
+                                    constraints: BoxConstraints(),
+                                    onPressed: () {
+                                      setState(() {
+                                        _myReview = 3;
+                                      });
+                                    },
+                                    icon: SvgPicture.asset("assets/images/lego-brick.svg", height: 15,color: _myReview >= 3 ? colorLegoYellow : colorGrey)
+                                ),
+                                IconButton(
+                                    padding: EdgeInsets.zero,
+                                    constraints: BoxConstraints(),
+                                    onPressed: () {
+                                      setState(() {
+                                        _myReview = 4;
+                                      });
+                                    },
+                                    icon: SvgPicture.asset("assets/images/lego-brick.svg", height: 15,color: _myReview >= 4 ? colorLegoYellow : colorGrey)
+                                ),
+                                IconButton(
+                                    padding: EdgeInsets.zero,
+                                    constraints: BoxConstraints(),
+                                    onPressed: () {
+                                      setState(() {
+                                        _myReview = 5;
+                                      });
+                                    },
+                                    icon: SvgPicture.asset("assets/images/lego-brick.svg", height: 15,color: _myReview >= 5 ? colorLegoYellow : colorGrey)
+                                ),
+                              ],
+                            ),
                             TextField(
                               decoration: InputDecoration(
                                   border: OutlineInputBorder(),

@@ -31,7 +31,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
             onPressed: (){
               Navigator.pushNamedAndRemoveUntil(context, "/home", (route) => false);
             },
-            // @TODO: update icon - use lego brick
             icon: SvgPicture.asset("assets/images/lego-brick.svg", color: Colors.white, height: 20,),
           )
         ],
@@ -131,6 +130,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     boxShadow: [BoxShadow(blurRadius: 10, color: Colors.black, spreadRadius: 5)],
                   ),
                   child: widget.user == null ? Container() : CircleAvatar(
+                    backgroundColor: Colors.white,
                     radius: MediaQuery.of(context).size.height*0.1,
                     backgroundImage: NetworkImage(widget.user!.avatar),
                   ),
