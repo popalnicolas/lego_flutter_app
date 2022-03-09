@@ -3,7 +3,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:lego_flutter_app/models/category_model.dart';
 import 'package:lego_flutter_app/models/product_model.dart';
 import 'package:lego_flutter_app/models/review_model.dart';
+import 'package:lego_flutter_app/models/user_model.dart';
 import 'package:lego_flutter_app/services/local_storage/localstorage_user_service.dart';
+import 'package:lego_flutter_app/services/webservices/reviews_service.dart';
 
 import '../constants.dart';
 import '../hex_color.dart';
@@ -22,12 +24,41 @@ class ReviewsScreen extends StatefulWidget {
 class _ReviewsScreenState extends State<ReviewsScreen> {
 
   final _authLocalStorage = UserLocalStorageService();
+  final _reviewService = ReviewService();
+
+  UserModel? _user;
 
   String _reviewText = "";
   bool _isLogged = true;
   String _errorMsg = "";
 
   int _myReview = 1;
+
+  bool _isReviewed = false;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    _authLocalStorage.isLoggedIn().then((value) {
+      if(value) {
+        _authLocalStorage.getUser().then((value) {
+          setState(() {
+            _user = value;
+          });
+
+          for (ReviewModel review in widget.reviews) {
+            if (review.userEmail == _user!.userEmail){
+              setState(() {
+                _isReviewed = true;
+              });
+            }
+          }
+        });
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +103,7 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
                   padding: const EdgeInsets.fromLTRB(defaultPadding, defaultPadding*2, defaultPadding, defaultPadding/2),
                   child: Column(
                     children: [
-                      SizedBox(
+                      _user == null || _isReviewed ? Container() : SizedBox(
                         height: MediaQuery.of(context).size.height*0.2,
                         child: Column(
                           children: [
@@ -147,6 +178,13 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
                               onPressed: () async {
                                 if(await _authLocalStorage.isLoggedIn()) {
                                   print(_reviewText);
+
+                                  UserModel user = await _authLocalStorage.getUser();
+                                  await _reviewService.leaveReview(widget.product.legoId, _myReview, _reviewText, user.access_token);
+
+                                  setState(() {
+                                    widget.reviews.insert(0, ReviewModel(rating: _myReview, comment: _reviewText, userEmail: user.userEmail));
+                                  });
                                 }
                                 else{
                                   setState(() {

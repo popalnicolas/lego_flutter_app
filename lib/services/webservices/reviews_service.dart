@@ -24,4 +24,27 @@ class ReviewService
       return List.empty();
     }
   }
+
+  Future leaveReview(int legoId, int rating, String comment, String header) async
+  {
+    try{
+      Map<String, dynamic> map = {
+        "rating": rating,
+        "comment": comment,
+        "lego": {
+          "legoId": legoId
+        }
+      };
+
+      Response response = await post(Uri.parse(url),
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer $header"
+          },
+          body: jsonEncode(map)
+      );
+    } catch(e) {
+      print(e.toString());
+    }
+  }
 }

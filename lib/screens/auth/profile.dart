@@ -177,6 +177,7 @@ class _PersonalProfileBoxState extends State<PersonalProfileBox> {
             widget.userAvatar == null ? Container()
                 :
             CircleAvatar(
+              backgroundColor: Colors.white,
               radius: MediaQuery.of(context).size.width*0.1,
               backgroundImage: NetworkImage(widget.userAvatar!),
             ),

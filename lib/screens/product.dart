@@ -192,7 +192,6 @@ class _ProductScreenState extends State<ProductScreen> {
                                   SvgPicture.asset("assets/images/lego-brick.svg", color: _rating >= 5 ? colorLegoYellow : colorGrey,height: 20,),
                                 ],
                               ),
-                              _reviews.isEmpty ? Container() :
                               TextButton(
                                 onPressed: (){
                                   Navigator.of(context).push(
