@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class ReviewsScreen extends StatefulWidget {
-  const ReviewsScreen({Key? key}) : super(key: key);
+class AccountReviewsScreen extends StatefulWidget {
+  const AccountReviewsScreen({Key? key}) : super(key: key);
 
   @override
-  _ReviewsScreenState createState() => _ReviewsScreenState();
+  _AccountReviewsScreenState createState() => _AccountReviewsScreenState();
 }
 
-class _ReviewsScreenState extends State<ReviewsScreen> {
+class _AccountReviewsScreenState extends State<AccountReviewsScreen> {
   @override
   Widget build(BuildContext context) {
     return Container();

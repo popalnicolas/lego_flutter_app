@@ -4,6 +4,7 @@ class ProductModel{
   final int legoId;
   final String legoName;
   final int age;
+  final int pieces;
   final String legoImage;
   final String legoManual;
   final double price;
@@ -12,6 +13,7 @@ class ProductModel{
     required this.legoId,
     required this.legoName,
     required this.age,
+    required this.pieces,
     required this.legoImage,
     required this.legoManual,
     required this.price,
@@ -23,6 +25,7 @@ class ProductModel{
       legoId: json['legoId'],
       legoName: json['legoName'],
       age: json['age'],
+      pieces: json['pieces'],
       legoImage: json['legoImage'],
       legoManual: json['legoManual'],
       price: json['price']
@@ -34,6 +37,7 @@ class ProductModel{
       "legoId": product.legoId,
       "legoName": product.legoName,
       "age": product.age,
+      "pieces": product.pieces,
       "legoImage": product.legoImage,
       "legoManual": product.legoManual,
       "price": product.price

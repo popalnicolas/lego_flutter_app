@@ -13,8 +13,6 @@ class ProductService{
       Response response = await get(Uri.parse("$url?categoryId=$categoryId"));
       Iterable responseGet = jsonDecode(response.body);
 
-      print(response.body);
-
       List<ProductModel> products = List<ProductModel>.from(responseGet.map((e) => ProductModel.fromJson(e)));
 
       return products;

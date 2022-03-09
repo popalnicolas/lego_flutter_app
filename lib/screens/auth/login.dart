@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:lego_flutter_app/models/user_model.dart';
 import 'package:lego_flutter_app/services/local_storage/localstorage_user_service.dart';
@@ -39,8 +40,7 @@ class _LoginScreenState extends State<LoginScreen> {
             onPressed: (){
               Navigator.pushNamedAndRemoveUntil(context, "/home", (route) => false);
             },
-            // @TODO: update icon - use lego brick
-            icon: Icon(Icons.backpack),
+            icon: SvgPicture.asset("assets/images/lego-brick.svg", color: Colors.white, height: 20,),
           )
         ],
       ),

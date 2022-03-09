@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:lego_flutter_app/constants.dart';
 import 'package:lego_flutter_app/models/category_model.dart';
 import 'package:lego_flutter_app/screens/category.dart';
@@ -43,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Navigator.pushNamedAndRemoveUntil(context, "/account", (route) => false);
             },
             // @TODO: update icon - use lego head
-            icon: Icon(Icons.face),
+            icon: SvgPicture.asset("assets/images/lego-head.svg", color: Colors.white, height: 30,),
           )
         ],
       ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:lego_flutter_app/models/user_model.dart';
 import 'package:lego_flutter_app/screens/auth/account/about_screen.dart';
 import 'package:lego_flutter_app/screens/auth/account/liked_lego.dart';
@@ -31,7 +32,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               Navigator.pushNamedAndRemoveUntil(context, "/home", (route) => false);
             },
             // @TODO: update icon - use lego brick
-            icon: Icon(Icons.backpack),
+            icon: SvgPicture.asset("assets/images/lego-brick.svg", color: Colors.white, height: 20,),
           )
         ],
       ),
@@ -89,7 +90,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           GestureDetector(
                             child: ProfileBox(title: "My Reviews", image: "assets/images/legoreview.png"),
                             onTap: () {
-                              Navigator.of(context).push(MaterialPageRoute(builder: (context) => ReviewsScreen()));
+                              Navigator.of(context).push(MaterialPageRoute(builder: (context) => AccountReviewsScreen()));
                             },
                           ),
                           GestureDetector(

@@ -46,11 +46,15 @@ class AuthService
 
     Map<String, dynamic> jsonMap = {
       "userEmail": userEmail,
-      "password": password,
+      "userPassword": password,
     };
 
     try{
-      Response response = await post(Uri.parse("$url/register"), body: json.encode(jsonMap));
+      Response response = await post(
+          Uri.parse("$url/register"),
+          headers: {"Content-Type": "application/json"},
+          body: json.encode(jsonMap)
+      );
 
       if(response.statusCode == 200)
         return true;
