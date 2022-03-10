@@ -65,4 +65,16 @@ class AuthService
       return false;
     }
   }
+  
+  Future changeAvatar(String header, int avatarId) async
+  {
+    try{
+      await put(
+        Uri.parse("$url/avatar?avatarId=$avatarId"),
+        headers: {"Content-Type": "application/json", "Authorization": "Bearer $header"},
+      );
+    } catch(e) {
+      print(e.toString());
+    }
+  }
 }

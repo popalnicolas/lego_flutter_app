@@ -8,9 +8,9 @@ import 'package:lego_flutter_app/screens/auth/account/personal_profile.dart';
 import '../../constants.dart';
 
 class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({Key? key, this.user, required this.logoutUser}) : super(key: key);
+  ProfileScreen({Key? key, this.user, required this.logoutUser}) : super(key: key);
 
-  final UserModel? user;
+  UserModel? user;
   final Function() logoutUser;
 
   @override
@@ -70,7 +70,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               GestureDetector(
                                 child: PersonalProfileBox(userAvatar: widget.user!.avatar,),
                                 onTap: () {
-                                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => PersonalProfileScreen()));
+                                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => PersonalProfileScreen(user: widget.user!,))).then((value) {
+                                    setState(() {
+                                      widget.user = value;
+                                    });
+                                  });
                                 },
                               ),
                           GestureDetector(

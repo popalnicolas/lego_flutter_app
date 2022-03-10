@@ -3,8 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lego_flutter_app/constants.dart';
 import 'package:lego_flutter_app/models/category_model.dart';
+import 'package:lego_flutter_app/models/product_model.dart';
 import 'package:lego_flutter_app/screens/category.dart';
+import 'package:lego_flutter_app/screens/product.dart';
 import 'package:lego_flutter_app/services/webservices/category_service.dart';
+import 'package:lego_flutter_app/services/webservices/product_service.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -16,7 +19,10 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
 
   final _categoryService = CategoryService();
+  final _productService = ProductService();
+
   List<CategoryModel>? _categories;
+  List<ProductModel> _products = [];
 
   @override
   void initState() {
@@ -26,6 +32,12 @@ class _HomeScreenState extends State<HomeScreen> {
     _categoryService.getAllCategories().then((value) {
       setState(() {
         _categories = value;
+      });
+    });
+
+    _productService.getNewestLego().then((value) {
+      setState(() {
+        _products = value;
       });
     });
   }
@@ -129,8 +141,83 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   SizedBox(height: defaultPadding,),
-                  Text("Top Rated", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
-                  //@TODO: Top Rated Legos here
+                  Text("Newest", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+                  SizedBox(height: defaultPadding/2,),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height*0.3,
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      itemCount: _products.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Padding(
+                          padding: const EdgeInsets.only(right: defaultPadding),
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).push(
+                                  MaterialPageRoute(builder: (context) =>
+                                      ProductScreen(category: _products[index].category!, product: _products[index],))
+                              );
+                            },
+                            child: Container(
+                              width: MediaQuery.of(context).size.width*0.6,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.all(
+                                      Radius.circular(10)
+                                  )
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(defaultPadding),
+                                child: Column(
+                                  children: [
+                                    Align(
+                                      alignment: Alignment.topLeft,
+                                      child: Text(
+                                        "#${_products[index].legoId}",
+                                        style: TextStyle(color: Colors.grey[400]),
+                                      ),
+                                    ),
+                                    Image.network(
+                                      _products[index].legoImage, height: MediaQuery.of(context).size.height*0.15,
+                                      loadingBuilder: (BuildContext context, Widget child,
+                                          ImageChunkEvent? loadingProgress) {
+                                        if (loadingProgress == null) return child;
+                                        return Center(
+                                          child: CircularProgressIndicator(
+                                            value: loadingProgress.expectedTotalBytes != null
+                                                ? loadingProgress.cumulativeBytesLoaded /
+                                                loadingProgress.expectedTotalBytes!
+                                                : null,
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                    SizedBox(height: defaultPadding,),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text(_products[index].legoName,),
+                                            Text(_products[index].category!.categoryName, style: TextStyle(color: Colors.grey[400], fontSize: 12))
+                                          ],
+                                        ),
+                                        Text(
+                                            _products[index].price%1 == 0 ? "DKK ${_products[index].price.floor()}" : "DKK ${_products[index].price}0",
+                                            style: TextStyle(color: Colors.grey[400], fontSize: 12))
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
                 ],
               ),
             ),

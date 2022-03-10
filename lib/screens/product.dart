@@ -49,7 +49,7 @@ class _ProductScreenState extends State<ProductScreen> {
       print(_rating);
     });
 
-    _likedLegoService.isPhotoLiked(widget.product).then((value) {
+    _likedLegoService.isLegoLiked(widget.product).then((value) {
       setState(() {
         _isLegoLiked = value;
       });
@@ -104,9 +104,9 @@ class _ProductScreenState extends State<ProductScreen> {
                         child: IconButton(
                           onPressed: () async {
                             if(!_isLegoLiked)
-                              _likedLegoService.likePhoto(widget.product);
+                              _likedLegoService.likeLego(widget.product);
                             else
-                              _likedLegoService.dislikePhoto(widget.product);
+                              _likedLegoService.dislikeLego(widget.product);
                             setState(() {
                               _isLegoLiked = !_isLegoLiked;
                             });

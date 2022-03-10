@@ -8,6 +8,7 @@ class ProductModel{
   final String legoImage;
   final String legoManual;
   final double price;
+  final CategoryModel? category;
 
   ProductModel({
     required this.legoId,
@@ -17,6 +18,7 @@ class ProductModel{
     required this.legoImage,
     required this.legoManual,
     required this.price,
+    this.category
   });
 
   static ProductModel fromJson(json)
@@ -28,7 +30,8 @@ class ProductModel{
       pieces: json['pieces'],
       legoImage: json['legoImage'],
       legoManual: json['legoManual'],
-      price: json['price']
+      price: json['price'],
+      category: CategoryModel.fromJson(json['category'])
     );
   }
 
@@ -40,7 +43,8 @@ class ProductModel{
       "pieces": product.pieces,
       "legoImage": product.legoImage,
       "legoManual": product.legoManual,
-      "price": product.price
+      "price": product.price,
+      "category": CategoryModel.toJson(product.category!)
     };
 
     return jsonMap;

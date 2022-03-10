@@ -33,4 +33,19 @@ class ProductService{
       return null;
     }
   }
+
+  Future<List<ProductModel>> getNewestLego() async
+  {
+    try{
+      Response response = await get(Uri.parse("$url/newest"));
+      Iterable responseGet = jsonDecode(response.body);
+
+      List<ProductModel> products = List<ProductModel>.from(responseGet.map((e) => ProductModel.fromJson(e)));
+
+      return products;
+    } catch(e) {
+      print(e.toString());
+      return List.empty();
+    }
+  }
 }

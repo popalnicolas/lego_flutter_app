@@ -14,13 +14,15 @@ class LikedLegoLocalStorageService
     if(likedLegos == null)
       return null;
 
+    print(likedLegos);
+
     Iterable getResponse = jsonDecode(likedLegos);
     List<ProductModel> legos = List<ProductModel>.from(getResponse.map((e) => ProductModel.fromJson(e)));
 
     return legos;
   }
 
-  Future<bool> isPhotoLiked(ProductModel lego) async
+  Future<bool> isLegoLiked(ProductModel lego) async
   {
     var likedLegos = await getLikedLegos();
 
@@ -35,7 +37,7 @@ class LikedLegoLocalStorageService
     return false;
   }
 
-  Future likePhoto(ProductModel lego) async{
+  Future likeLego(ProductModel lego) async{
     var likedLegos = await getLikedLegos();
 
     List<Map> newList = [];
@@ -52,7 +54,7 @@ class LikedLegoLocalStorageService
     _storage.write(key: "liked_products", value: jsonEncode(newList));
   }
 
-  Future dislikePhoto(ProductModel lego) async{
+  Future dislikeLego(ProductModel lego) async{
     var likedLegos = await getLikedLegos();
 
     List<Map> newList = [];
