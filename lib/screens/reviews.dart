@@ -70,7 +70,7 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
         elevation: 0,
         leading: IconButton(
           onPressed: () {
-            Navigator.of(context).pop();
+            Navigator.of(context).pop(widget.reviews);
           },
           icon: Icon(Icons.arrow_back_ios),
         ),
@@ -184,6 +184,7 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
 
                                   setState(() {
                                     widget.reviews.insert(0, ReviewModel(rating: _myReview, comment: _reviewText, userEmail: user.userEmail));
+                                    print(widget.reviews[0].comment);
                                     _isReviewed = true;
                                   });
                                 }

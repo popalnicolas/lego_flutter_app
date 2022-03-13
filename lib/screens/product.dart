@@ -197,7 +197,17 @@ class _ProductScreenState extends State<ProductScreen> {
                                   Navigator.of(context).push(
                                       MaterialPageRoute(builder: (context) =>
                                           ReviewsScreen(reviews: _reviews, product: widget.product, category: widget.category))
-                                  );
+                                  ).then((value) {
+                                    setState(() {
+                                      _reviews = value;
+
+                                      _rating = 0;
+                                      for(ReviewModel reviewModel in _reviews){
+                                        _rating += reviewModel.rating;
+                                      }
+                                      _rating = _rating/_reviews.length;
+                                    });
+                                  });
                                 },
                                 child: Text("See all reviews"),
                               )
